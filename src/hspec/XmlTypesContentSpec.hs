@@ -19,7 +19,7 @@ spec = do
   describe "textNodes" do
     prop "Produces nodes that decode to the source" do
       -- For some reason xml-conduit remaps '\r' to '\n', so we simply work around that.
-      text <- suchThat arbitrary (not . Text.elem '\r')
+      text <- suchThat arbitrary (not . elem '\r' . Text.unpack)
       pure case extractTextContentFromXml (textXml text) of
         Right decodedText ->
           if decodedText == text
