@@ -1,6 +1,6 @@
 cabal-version: 3.0
 name: xml-types-content
-version: 0.0.1
+version: 0.0.1.1
 synopsis: Utilities for dealing with Content-values of "xml-types"
 description:
   The `Content` type in "xml-types" is tricky and naive usage of it can lead to bugs.
