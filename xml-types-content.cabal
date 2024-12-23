@@ -46,7 +46,6 @@ library
   build-depends:
     base >=4.13 && <5,
     text >=1.2 && <3,
-    text-builder-dev ^>=0.3.9,
     xml-types ^>=0.3.8,
 
 test-suite hspec
