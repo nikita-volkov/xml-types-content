@@ -17,9 +17,19 @@ import Prelude
 spec :: Spec
 spec = do
   describe "textNodes" do
+    it "Properly encodes a control character" do
+      let text = "a&b"
+      XmlTypesContent.textContents text
+        `shouldBe` [ContentText "a", ContentEntity "amp", ContentText "b"]
+
+    it "Properly encodes an undefined character" do
+      let text = "a\64976b"
+      XmlTypesContent.textContents text
+        `shouldBe` [ContentText "a", ContentEntity "#64976", ContentText "b"]
+
     prop "Produces nodes that decode to the source" do
       -- For some reason xml-conduit remaps '\r' to '\n', so we simply work around that.
-      text <- suchThat arbitrary (not . elem '\r' . Text.unpack)
+      text <- Text.pack <$> suchThat arbitrary (not . elem '\r')
       pure case extractTextContentFromXml (textXml text) of
         Right decodedText ->
           if decodedText == text

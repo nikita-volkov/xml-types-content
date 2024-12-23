@@ -8,7 +8,6 @@ import Data.Function
 import Data.Text (Text)
 import qualified Data.Text as Text
 import Data.XML.Types
-import qualified TextBuilderDev
 import Prelude
 
 -- |
@@ -41,7 +40,7 @@ codepointEntityText = \case
 
 codepointDecimalEntityText :: Int -> Text
 codepointDecimalEntityText codepoint =
-  TextBuilderDev.fromTextBuilder ("#" <> TextBuilderDev.unsignedDecimal codepoint)
+  Text.pack ('#' : show codepoint)
 
 charNeedsNoEscaping :: Char -> Bool
 charNeedsNoEscaping = codepointNeedsNoEscaping . ord
